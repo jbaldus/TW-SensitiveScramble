@@ -1,0 +1,14 @@
+author: Jason Baldus
+core-version: >=5.1.23
+created: 20210511022011645
+description: A plugin to render certain words with a simple encryption to prevent casual shoulder surfing.
+list: readme license history
+modified: 20210511022228633
+plugin-type: plugin
+source: https://github.com/jbaldus/TW-sensitive-scramble
+tags: 
+title: $:/plugins/jbaldus/sensitive-scramble
+type: application/json
+version: 1.0.0
+
+{"tiddlers": {}}

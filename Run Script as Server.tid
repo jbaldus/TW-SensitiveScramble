@@ -1,0 +1,34 @@
+created: 20210329151803045
+creator: jason
+modified: 20210511023736408
+modifier: jason
+tags: server IT bash CTF
+title: Run Script as Server
+type: text/vnd.tiddlywiki
+
+Say you have written an interactive ???python??? program of some kind and want to have people be able to interact with it by connecting over a network.
+
+You can use `ncat` to run this script as a server, like this
+
+```bash
+ncat -lkvp 4444 -e "/usr/bin/python3 game.py"
+```
+
+The options mean the following:
+
+* `-l` means to listen for incoming connections
+* `-k` means to restart when the connection is finished, or if another connection is made. This is important if you want more than one person to connect.
+* `-v` is for verbose output
+* `-p` specifies the port to listen on
+* `-e` specifies the script to run for each connection
+
+!!Connecting
+You can have people connect to your "server" with netcat. Suppose your IP address is `10.130.37.29`. They can just run:
+
+```bash
+nc 10.130.37.29 4444
+```
+
+!!!Notes
+[[Netcat]] is a pretty powerful tool. It seems like it would be a good idea to get to know it better.
+
