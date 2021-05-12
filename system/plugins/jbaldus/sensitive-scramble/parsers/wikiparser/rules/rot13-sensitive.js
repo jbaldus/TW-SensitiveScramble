@@ -57,7 +57,7 @@ function getSensitiveRegExp() {
     sensitiveWords = sensitiveWords.map(line => line.trim());
     sensitiveWords = sensitiveWords.filter(line => line[0] != "#");
     sensitiveWords = sensitiveWords.filter(line => line != "");
-    if ($tw.wiki.getTiddlerText("$:/plugins/jbaldus/sensitive-scramble/config/auto-wordify", "yes") != "no") {
+    if ($tw.wiki.getTiddlerText("$:/plugins/jbaldus/sensitive-scramble/config/match-whole-words", "yes") != "no") {
         sensitiveWords = sensitiveWords.map(wordToBoundedWord);
     } else {
         sensitiveWords = sensitiveWords.map(unTildeWord);
