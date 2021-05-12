@@ -1,6 +1,6 @@
 caption: Sensitive-Scramble
 created: 20210510025333924
-modified: 20210511035916105
+modified: 20210512133541664
 tags: $:/tags/ControlPanel/Settings
 title: $:/plugins/jbaldus/sensitive-scramble/ui/ControlPanel/Settings/sensitive-scramble
 type: text/vnd.tiddlywiki
@@ -30,4 +30,11 @@ If you want to only scramble the word if it is not part of a bigger word, use //
 !!! <$link $to="$:/plugins/jbaldus/sensitive-scramble/config/words">Sensitive Word List</$link>
 
 Enter your sensitive words in the box below, one word per line. Requires reload after any changes.
+
 <$edit tiddler="$:/plugins/jbaldus/sensitive-scramble/config/words" tag="textarea"/> 
+
+!!! Mouseover Reveal
+
+You can allow the unscrambled word to be revealed when you hover the mouse over a scrambled word.
+
+<$checkbox tiddler="$:/plugins/jbaldus/sensitive-scramble/config/hover-reveal" field="text" checked="yes" unchecked="no" default="yes"> <$link to="$:/plugins/jbaldus/sensitive-scramble/config/hover-reveal">Reveal scrambled words on mouse hover.</$link> </$checkbox>

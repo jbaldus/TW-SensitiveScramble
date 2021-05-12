@@ -8,3 +8,8 @@ system/plugins/*
 !system/plugins/jbaldus
 system/plugins/jbaldus/*
 !system/plugins/jbaldus/sensitive-scramble*
+!system/config
+system/config/*
+!system/config/DefaultColourMappings
+system/config/DefaultColourMappings/*
+!system/config/DefaultColourMappings/ss*

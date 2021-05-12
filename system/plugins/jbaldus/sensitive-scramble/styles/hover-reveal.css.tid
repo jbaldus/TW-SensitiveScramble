@@ -1,25 +1,36 @@
 created: 20210511174907785
-modified: 20210512030328862
+modified: 20210512140611671
 tags: $:/tags/Stylesheet
 title: $:/plugins/jbaldus/sensitive-scramble/styles/hover-reveal.css
 type: text/vnd.tiddlywiki
 
+<pre>
 .ss-scrambled {
 		position: relative;
 }
-
+<$reveal type="match" state="$:/plugins/jbaldus/sensitive-scramble/config/hover-reveal" text="yes" default="yes">
 .ss-scrambled:hover {
     color: <<colour tiddler-background>>;
+		transition: color 0.3s;
 }
 
-.ss-scrambled[data-plaintext]:hover::after {
+.ss-scrambled[data-plaintext]::after {
 		content: attr(data-plaintext);
 		color: <<colour ss-plaintext>>;
 		background-color: <<colour tiddler-background>>;
-		text-shadow: 0px 0px 2px <<colour alert-highlight>>;
+		border: 1px solid <<colour ss-plaintext-border>>;
 		position: absolute;
-		left:50%;
-		top:50%;
-		padding: 0px 0.1em;
+		left: 50%;
+		top: 50%;
+		padding: 0px 0.2em;
 		transform: translate(-50%, -50%);
+		opacity:0;
 }
+
+.ss-scrambled[data-plaintext]:hover::after {
+    opacity: 1;
+		transition: opacity 0.2s;
+		transition-timing-function: cubic-bezier(1,-0.06,.39,.89);
+}
+</$reveal>
+</pre>
