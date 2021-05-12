@@ -1,7 +1,7 @@
 /*\
 created: 20210508202122053
 type: application/javascript
-title: $:/plugins/jbaldus/sensitive-scramble/parsers/wikiparser/rules/rot13-sensitive.js
+title: $:/plugins/jbaldus/sensitive-scramble/wikirules/rot13-sensitive.js
 tags: 
 modified: 20210511035534021
 module-type: wikirule
@@ -73,7 +73,7 @@ exports.init = function(parser) {
     // Regexp to match
     this.sensitiveWords = getSensitiveRegExp();
     this.matchRegExp = new RegExp(this.sensitiveWords, "ig");
-	console.log(this.matchRegExp);
+    console.log(this.matchRegExp);
     // If there are no sensitive words, don't match anything
     if (this.sensitiveWords.trim() === "") {
         // make the matchRegExp so crazy it will never match anything
@@ -87,10 +87,17 @@ exports.parse = function() {
     this.parser.pos = this.matchRegExp.lastIndex;
 
     return [{
-        type: "text",
-        text: rot13(this.match[0])
+        type: "element",
+        tag: "span",
+        attributes: {
+            "class": {type: "string", value: "ss-scrambled"},
+            "data-plaintext": {type: "string", value: this.match[0]}
+        },
+        children: [{
+            type: "text",
+            text: rot13(this.match[0])
+        }]
     }];
 };
 
 })();
-    
