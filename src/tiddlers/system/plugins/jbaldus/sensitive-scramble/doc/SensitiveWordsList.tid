@@ -1,0 +1,18 @@
+created: 20210516235326885
+modified: 20210517010243970
+tags: 
+title: $:/plugins/jbaldus/sensitive-scramble/doc/SensitiveWordsList
+type: text/vnd.tiddlywiki
+
+\rules except sensitive-scramble
+
+If //Match Whole Words// is turned ''on'', words will get a //word boundary// marker added on either side of them. This makes it so the words will only be scrambled if they appear as an independent word, and not if they are part of a bigger word. To suppress the automatic boundary markers, start or end the word with a //~// on the side you want to allow your word to connect to other parts of the word.
+
+If //Match Whole Words// is turned ''off'', they will be scrambled wherever they match, regardless of where they appear in other words. If you have tilde's at the beginning or end of words, they are ignored. //(This way, you don't have to change your list of sensitive words if you were using whole word matching.)// 
+
+Lines that start with a "#" are comments and not scrambled. Comments are only supported in this way--you can't comment by putting a "#" after a word. In that case the comment becomes part of the word.
+
+Whitespace is trimmed from the beginning and end of each line. Blank lines are ignored.
+
+
+All matching is done in a case-insensitive way.

@@ -1,17 +1,11 @@
 caption: Add to Sensitive Words List
 condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
-created: 20210514194159280
-description: {{$:/language/Buttons/Bold/Hint}}
+description: Add selected word to sensitives list
 icon: $:/core/images/spiral
-modified: 20210514195334833
-shortcuts: 
 tags: $:/tags/EditorToolbar
 title: $:/plugins/jbaldus/sensitive-scramble/ui/EditorToolbar/add-to-sensitive-list
-type: text/vnd.tiddlywiki
 
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="add-to-sensitive-list"
-	prefix="''"
-	suffix="''"
 />

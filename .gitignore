@@ -1,15 +1,1 @@
-npm-packages/
-drafts/
-system/*
-!system/SiteTitle.tid
-!system/SiteSubtitle.tid
-!system/plugins/
-system/plugins/*
-!system/plugins/jbaldus
-system/plugins/jbaldus/*
-!system/plugins/jbaldus/sensitive-scramble*
-!system/config
-system/config/*
-!system/config/DefaultColourMappings
-system/config/DefaultColourMappings/*
-!system/config/DefaultColourMappings/ss*
+node_modules

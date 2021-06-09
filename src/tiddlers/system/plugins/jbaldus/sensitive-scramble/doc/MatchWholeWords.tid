@@ -1,0 +1,36 @@
+created: 20210516201311295
+modified: 20210529203120149
+tags: 
+title: $:/plugins/jbaldus/sensitive-scramble/doc/MatchWholeWords
+type: text/vnd.tiddlywiki
+
+\rules except sensitive-scramble
+
+Sensitive-Scramble can make your list of sensitive words only match if your sensitive word is not part of a bigger word. So, for example if you want to scramble the word eval it won't scramble the word reevaluate to rerinyuate.
+
+The Match Whole Words setting can make words in your list of sensitive words, by default, only match if your sensitive word is not part of a bigger word.  
+
+This is controlled by the setting:
+<$checkbox tiddler="$:/plugins/jbaldus/sensitive-scramble/config/match-whole-words" field="text" checked="yes" unchecked="no" default="yes"> <$link to="$:/plugins/jbaldus/sensitive-scramble/config/match-whole-words">Match Whole Words</$link> </$checkbox>
+
+So, for example if you want to scramble the word //eval// it won't scramble the word //reevaluate// to //re''riny''uate//.
+
+When the Match Whole Words setting is turned on, you can override the default behavior by starting and/or ending the word in your list with a //~// to indicate which end of your word you want to suppress the word boundary requirement. See the table below for examples of how this might look.
+
+|!In your list|!Scrambles|!Example|
+| eval |Only the word //eval// if is is a word by itself.|eval &#8669; //riny// |
+|~|~|evaluate &#8669; evaluate |
+|~|~|reevalueate &#8669; reevaluate |
+|~|~|medieval &#8669; medieval |
+| eval~ |The letters //eval// if it is a word by itself,<br/> or the ''start'' of a word. <br/>(Only //eval// gets scrambled) |eval &#8669; //riny// |
+|~|~|evaluate &#8669; //riny//uate |
+|~|~|reevalueate &#8669; reevaluate |
+|~|~|medieval &#8669; medieval |
+| ~eval |The letters //eval// if it is a word by itself,<br/> or the ''end'' of a word. <br/>(Only //eval// gets scrambled) |eval &#8669; //riny// |
+|~|~|evaluate &#8669; evaluate |
+|~|~|reevalueate &#8669; reevaluate |
+|~|~|medieval &#8669; medi//riny// |
+| ~eval~ |The letters //eval//, regardless of where it<br/> exists in a word. |eval &#8669; //riny// |
+|~|~|evaluate &#8669; //riny//uate |
+|~|~|reevalueate &#8669; re//riny//uate |
+|~|~|medieval &#8669; medi//riny// |
