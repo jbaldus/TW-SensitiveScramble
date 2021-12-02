@@ -3,7 +3,7 @@ created: 20210508202122053
 type: application/javascript
 title: $:/plugins/jbaldus/sensitive-scramble/wikirules/rot13-sensitive.js
 tags: 
-modified: 20210511035534021
+modified: 20211202015156376
 module-type: wikirule
 
 Wiki text inline rule for scrambling words that are in a list of sensitive words. Nothing special needs to be done when writing the tiddler to mark the sensitive words. Instead, they are defined in the tiddler $:/config/sensitive-scramble/sensitive-words, one per line. Actually, each line can be a regular expression, but it's probably easier to just stick to words. The words will be joined with a pipe when put into the regular expression. If the $:/config/sensitive-scramble/sensitive-words tiddler doesn't exist, or contains no words, then this rule will do nothing. 
@@ -48,7 +48,7 @@ exports.parse = function() {
         },
         children: [{
             type: "text",
-            text: rot13.rot13(this.match[0])
+            text: rot13.rot13(this.match[0],3)
         }]
     }];
 };

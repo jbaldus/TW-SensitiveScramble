@@ -1,9 +1,9 @@
 /*\
 created: 20210515214348302
-title: $:/plugins/jbaldus/sensitive-scramble/lib/rot13.js
 type: application/javascript
-modified: 20210515215356627
+title: $:/plugins/jbaldus/sensitive-scramble/lib/rot13.js
 tags: 
+modified: 20211202014646943
 module-type: library
 \*/
 (function(){
@@ -13,6 +13,9 @@ module-type: library
 "use strict";
 
 const WORDLIST="$:/plugins/jbaldus/sensitive-scramble/config/words";
+const HIDDENWORDLIST="$:/plugins/jbaldus/sensitive-scramble/config/hidden-words";
+const MATCH_WHOLE_WORDS="$:/plugins/jbaldus/sensitive-scramble/config/match-whole-words"
+const SCRAMBLE_CONTAINING_WORD="$:/plugins/jbaldus/sensitive-scramble/config/scramble-containing-word"
 
 exports.rot13 = function (mystring, rotation_value=13) {
     return mystring.replace(/[a-zA-Z]/g, function(chr) {
@@ -23,22 +26,22 @@ exports.rot13 = function (mystring, rotation_value=13) {
 
 exports.addWordBounds = function (word) {
     var boundedWord = word,
-            frontBoundaryMark = /^(\\b)?/,
-            backBoundaryMark = /(\\b)?$/,
-            frontTildeTest = /^~/,
-            backTildeTest = /(?<!\\)~$/;
+        frontBoundaryMark = /^(\\b)?/,
+        backBoundaryMark = /(\\b)?$/,
+        frontTildeTest = /^~/,
+        backTildeTest = /(?<!\\)~$/;
     if (word === undefined) {
-            return undefined;
+        return undefined;
     }
     if (frontTildeTest.test(word)) {
-            boundedWord = boundedWord.replace(frontTildeTest, '');
+        boundedWord = boundedWord.replace(frontTildeTest, '');
     } else {
-            boundedWord = boundedWord.replace(frontBoundaryMark, '\\b');
+        boundedWord = boundedWord.replace(frontBoundaryMark, '\\b');
     }
     if (backTildeTest.test(word)) {
         boundedWord = boundedWord.replace(backTildeTest, '');
     } else {
-            boundedWord = boundedWord.replace(backBoundaryMark, '\\b');
+        boundedWord = boundedWord.replace(backBoundaryMark, '\\b');
     }
     return boundedWord;
 }
@@ -52,16 +55,32 @@ exports.tildeWord = function(word) {
     return word.replace(/^~/, '\\~').replace(/~$/, '\\~')
 }
 
+exports.expandMatch = function(word) {
+    var expandedWord = word,
+        expandableFront = /^(?=[^\\b])/,
+        expandableBack = /(?<!\\b)$/;
+    if (word === undefined) {
+        return undefined;
+    }
+    expandedWord = expandedWord.replace(expandableFront, '\\b\\w*');
+    expandedWord = expandedWord.replace(expandableBack, "\\w*\\b");
+    return expandedWord;
+}
+
 exports.getSensitiveRegExp = function() {    
     var sensitiveWords = $tw.wiki.getTiddlerText(WORDLIST,"");
+    sensitiveWords += "\n"+$tw.wiki.getTiddlerText(HIDDENWORDLIST,"");
     sensitiveWords = sensitiveWords.trim().split('\n');
     sensitiveWords = sensitiveWords.map(line => line.trim());
     sensitiveWords = sensitiveWords.filter(line => line[0] != "#");
     sensitiveWords = sensitiveWords.filter(line => line != "");
-    if ($tw.wiki.getTiddlerText(WORDLIST, "yes") != "no") {
+    if ($tw.wiki.getTiddlerText(MATCH_WHOLE_WORDS, "yes") != "no") {
         sensitiveWords = sensitiveWords.map(this.addWordBounds);
     } else {
         sensitiveWords = sensitiveWords.map(this.unTildeWord);
+    }
+    if ($tw.wiki.getTiddlerText(SCRAMBLE_CONTAINING_WORD, "yes") != "no") {
+        sensitiveWords = sensitiveWords.map(this.expandMatch);
     }
     return sensitiveWords.join('|');
 }

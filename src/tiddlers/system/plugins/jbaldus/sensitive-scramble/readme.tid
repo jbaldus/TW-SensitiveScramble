@@ -1,7 +1,9 @@
 created: 20210511022227125
-modified: 20210511023214436
+modified: 20211202015710355
 tags: 
 title: $:/plugins/jbaldus/sensitive-scramble/readme
 type: text/vnd.tiddlywiki
 
 This plugin will render certain words using a very simple ROT-13 encryption to prevent casual observers from shoulder surfing. Importantly, this plugin ''does not'' actually encrypt the tiddlers--it simply renders the words that are in your list of sensitive words all scrambled up. //(If you're looking for actual encyption, ~TiddlyWiki has a built-in [[mechanism to encrypt|https://tiddlywiki.com/static/Encryption.html]] the entire wiki, or use [[Encrypt Tiddler Plugin|http://danielorodriguez.com/TW5-EncryptTiddlerPlugin/]] by Danielo Rodriguez.)//
+
+''Warning:'' This plugin can change the way your ~TiddlyWiki looks when it gets rendered. If you put words in your list of sensitive words that are part of the way CSS works, it might cause the CSS to improperly render the page.
